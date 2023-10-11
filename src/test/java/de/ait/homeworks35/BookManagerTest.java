@@ -62,4 +62,15 @@ class BookManagerTest {
         // Ожидаем, что результат поиска будет null, так как мы передали null вместо ISBN
         assertNull(result);
     }
+    @Test
+    void testFindBookByISBN() {
+        // Проверьте нахождение книги по её ISBN
+        Book book = new Book("1234567890", "Sample Book 1", "John Doe");
+        bookManager.addBook(book);
+
+        Book result = bookManager.findBookByISBN("1234567890");
+
+        assertNotNull(result);
+        assertEquals("Sample Book 1", result.getTitle());
+    }
 }
