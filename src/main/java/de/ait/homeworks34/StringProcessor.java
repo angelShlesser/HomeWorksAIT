@@ -3,10 +3,20 @@ package de.ait.homeworks34;
 public class StringProcessor {
 
         public String concatenate(String str1, String str2) {
+            if (str1 == null) {
+                str1 = "";
+            }
+
+            if (str2 == null) {
+                str2 = "";
+            }
             return str1 + str2;
         }
 
         public int getLength(String str) {
+            if (str == null) {
+                return 0;
+            }
             return str.length();
         }
 
