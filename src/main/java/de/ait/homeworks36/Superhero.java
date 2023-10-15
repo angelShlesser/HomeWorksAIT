@@ -8,6 +8,7 @@ public class Superhero {
     private int power;
     //int age: возраст супергероя.
     private int age;
+
     /*Реализуйте конструктор для класса Superhero, который принимает параметры name,
     power и age и инициализирует соответствующие поля.*/
     public Superhero(String name, int power, int age) {
@@ -50,16 +51,18 @@ public class Superhero {
     public int getAge() {
         return age;
     }
+
     // для возраста ограничения не вижу смысла делать, он может быть из будущего или жить тысячилетиями=)
     public void setAge(int age) {
         this.age = age;
     }
+
     /*
     Переопределите метод toString() для класса Superhero,
     чтобы он возвращал строку с информацией о супергерое в формате: "Имя: [name], Сила: [power], Возраст: [age]".
      */
     @Override
     public String toString() {
-        return  "\nИмя: [" + name + "] Сила: [" + power + "] Возраст: [" + age + "]";
+        return "\nИмя: [" + name + "] Сила: [" + power + "] Возраст: [" + age + "]";
     }
 }

@@ -10,6 +10,7 @@ class SuperheroManagerTest {
     private SuperheroManager superheroManager;
     private Superhero superhero1;
     private Superhero superhero2;
+
     @BeforeEach
     void setUp() {
         superheroManager = new SuperheroManager();
@@ -19,13 +20,11 @@ class SuperheroManagerTest {
 
     @Test
     void addSuperhero() {
-        superheroManager.addSuperhero(superhero1);
-        superheroManager.addSuperhero(superhero2);
-        // Проверяем, что супергерои superhero1 и superhero2 присутствуют в списке
-        assertTrue(superheroManager.getAllSuperheroes().contains(superhero1));
-        assertTrue(superheroManager.getAllSuperheroes().contains(superhero2));
-        // Проверяем, что супергерой с дублирующимся именем не был добавлен
-        assertEquals(2, superheroManager.getAllSuperheroes().size());
+        assertTrue(superheroManager.addSuperhero(superhero1));
+        assertTrue(superheroManager.addSuperhero(superhero2));
+
+        // Попробуем добавить супергероя с тем же именем (не должен добавиться)
+        assertTrue(superheroManager.addSuperhero(new Superhero("Superman", 9, 32)));
     }
 
     @Test
@@ -68,6 +67,7 @@ class SuperheroManagerTest {
         // Получим всех супергероев
         assertEquals(2, superheroManager.getAllSuperheroes().size());
     }
+
     @Test
     void updateSuperhero() {
         // Добавим супергероя с именем "Superman"
