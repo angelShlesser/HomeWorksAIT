@@ -1,42 +1,55 @@
-package de.javalessons.homework35_2;
+package de.ait.homeworks35_2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
+
+    //TODO: 1. Отсутствуют комментарии
+    // 2. Неправильное наименование переменных
+    // 3. Неправильное наименование методов
+    // 4. Не безопасный возврат списка друзей
+    // 5. Неправильная инициализация конструкторв
+    // 6. Неправиьный модификатор доступа списка друзей
+    // 7. Использование ArrayList вместо List
+
     private String userName;
     private int age;
-    private ArrayList<String> friendsList;
+    private List<String> friendsList = new ArrayList<>();
+
     public User(String name, int age) {
         this.userName = name;
         this.age = age;
-        this.friendsList = new ArrayList<>();
     }
+
     public String getName() {
         return userName;
     }
+
     public void setName(String newName) {
         this.userName = newName;
     }
+
     public int getAge() {
         return age;
     }
+
     public void setAge(int newAge) {
-        age = newAge;
+        this.age = newAge;
     }
+
     public void addFriend(String friendName) {
         friendsList.add(friendName);
     }
+
     public void removeFriend(String friendName) {
         friendsList.remove(friendName);
     }
-    public ArrayList<String> getFriends() {
-        return friendsList;
-    }
-}
 
-//Todo 1. делаем имя user_name более правильно без _
-// 2. вносим в конструкт лист друзей пустой при создании юзера
-// 3. исправляем в конструкте age на ввод возраста this.age = name;
-// 4. начало метода пишется с маленько буквы
-// 5. отсутствие комментариев
-// 6. права доступа
+    public List<String> getFriends() {
+        //Также, вы создали новый список друзей для возврата методом getFriends(),
+        //чтобы предотвратить изменение исходного списка друзей при получении его.
+        return new ArrayList<>(friendsList);
+    }
+
+}

@@ -1,84 +1,62 @@
-package de.javalessons.homework35_2;
+package de.ait.homeworks35_2;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
-    private User vitali;
-    private User alex;
-    private User igor;
+
+    private User user;
+
     @BeforeEach
     void setUp() {
-        vitali = new User("Vitali", 36);
-        alex = new User("Alex", 45);
-        igor = new User("Igor", 32);
+        user = new User("Иван", 30);
     }
 
     @Test
-    void setName() {
-        vitali.setName("lexa");
-        Assertions.assertEquals("lexa",vitali.getName());
+    void testGetName() {
+        assertEquals("Иван", user.getName());
     }
 
     @Test
-    void getAge() {
-        Assertions.assertEquals(32,igor.getAge());
+    void testSetName() {
+        user.setName("Петр");
+        assertEquals("Петр", user.getName());
     }
 
     @Test
-    void setAge() {
-        vitali.setAge(38);
-        Assertions.assertEquals(38,vitali.getAge());
+    void testGetAge() {
+        assertEquals(30, user.getAge());
     }
 
     @Test
-    void addFriend() {
-        vitali.addFriend("Liza");
-        vitali.addFriend("Katrin");
-        vitali.addFriend("Robert");
-        ArrayList<String> friends = vitali.getFriends();
-        // Проверяем, что размер списка друзей равен ожидаемому
-        assertEquals(3, friends.size());
-        // Проверяем, что список друзей содержит конкретных друзей
-        assertTrue(friends.contains("Liza"));
-        assertTrue(friends.contains("Katrin"));
-        assertTrue(friends.contains("Robert"));
+    void testSetAge() {
+        user.setAge(20);
+        assertEquals(20, user.getAge());
     }
 
     @Test
-    void removeFriend() {
-        vitali.addFriend("Alice");
-        vitali.addFriend("Bob");
-        vitali.addFriend("Charlie");
-
-        ArrayList<String> friends = vitali.getFriends();
-        assertFalse(friends.contains("Alice"));
-        assertTrue(friends.contains("Bob"));
-        assertTrue(friends.contains("Charlie"));
+    void testAddFriend() {
+        user.addFriend("Маша");
+        user.addFriend("Оля");
+        List<String> expectedFriends = new ArrayList<>();
+        expectedFriends.add("Маша");
+        expectedFriends.add("Оля");
+        assertEquals(expectedFriends, user.getFriends());
     }
 
     @Test
-    void removeFriendFromEmptyList() {
-        ArrayList<String> friends = vitali.getFriends();
-        assertTrue(friends.isEmpty()); // Убеждаемся, что список друзей пустой
+    void testRemoveFriend() {
+        user.addFriend("Саша");
+        user.addFriend("Маша");
+        user.removeFriend("Саша");
+        ArrayList<String> expectedFriends = new ArrayList<>();
+        expectedFriends.add("Маша");
+        assertEquals(expectedFriends, user.getFriends());
     }
 
-    @Test
-    void getFriends() {
-        vitali.addFriend("Alice");
-        vitali.addFriend("Bob");
-        vitali.addFriend("Charlie");
-
-        ArrayList<String> friends = vitali.getFriends();
-
-        assertEquals(3, friends.size());
-        assertTrue(friends.contains("Alice"));
-        assertTrue(friends.contains("Bob"));
-        assertTrue(friends.contains("Charlie"));
-    }
 }
