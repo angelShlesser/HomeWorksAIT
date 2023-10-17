@@ -63,11 +63,9 @@ public class SuperheroManager {
         Superhero existingSuperhero = getSuperhero(name);
 
         if (existingSuperhero != null) {
-            // Удаляем существующего супергероя
-            superheroes.remove(existingSuperhero);
-            // Добавляем нового супергероя
-            superheroes.add(newSuperhero);
+           existingSuperhero.setName(newSuperhero.getName());
+           existingSuperhero.setAge(newSuperhero.getAge());
+           existingSuperhero.setPower(newSuperhero.getPower());
         }
     }
-
 }

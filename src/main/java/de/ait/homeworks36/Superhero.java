@@ -63,6 +63,6 @@ public class Superhero {
      */
     @Override
     public String toString() {
-        return "\nИмя: [" + name + "] Сила: [" + power + "] Возраст: [" + age + "]";
+        return "Имя: [" + name + "] Сила: [" + power + "] Возраст: [" + age + "]";
     }
 }
