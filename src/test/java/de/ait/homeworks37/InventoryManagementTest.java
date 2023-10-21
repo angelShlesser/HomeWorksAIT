@@ -4,55 +4,87 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagementTest {
+
+    private MobilePhone samsungGalaxyS23Ultra;
+
     private InventoryManagement inventoryManagement;
-    private MobilePhone mobilePhone1;
-    private MobilePhone mobilePhone2;
 
     @BeforeEach
     void setUp() {
+        samsungGalaxyS23Ultra = new MobilePhone("Samsung", "S23 Ultra",
+                "Android", 1399.99);
         inventoryManagement = new InventoryManagement();
-        mobilePhone1 = new MobilePhone(1, "Brand 1", "Model 1", 64,200);
-        mobilePhone2 = new MobilePhone(2, "Brand 2", "Model 2", 128, 350);
+    }
 
-        inventoryManagement.addMobilePhone(mobilePhone1);
-    }
     @Test
-    void TestAddMobilePhoneSuccess(){
-        assertTrue(inventoryManagement.addMobilePhone(mobilePhone2));
+    void addMobilePhone() {
+        Assertions.assertTrue(inventoryManagement.addMobilePhone(samsungGalaxyS23Ultra));
+        Assertions.assertEquals(1, inventoryManagement.getAllMobilePhones().size());
     }
+
     @Test
-    void TestAddMobilePhoneFail(){
-        assertTrue(inventoryManagement.addMobilePhone(mobilePhone2));
-        // Попытка добавить мобильный телефон с тем же ID (не должно добавиться)
-        Assertions.assertFalse(inventoryManagement.addMobilePhone(mobilePhone2));
+    void getMobilephoneSuccess() {
+        inventoryManagement.addMobilePhone(samsungGalaxyS23Ultra);
+        UUID idSearchMobilephone = samsungGalaxyS23Ultra.getId();
+        Assertions.assertNotNull(inventoryManagement.getMobilephone(idSearchMobilephone));
+        Assertions.assertEquals(samsungGalaxyS23Ultra,
+                inventoryManagement.getMobilephone(idSearchMobilephone));
     }
+
+
     @Test
-    void TestGetMobilePhone(){
-        MobilePhone result = inventoryManagement.getMobilePhone(1);
-        Assertions.assertNotNull(result);
-        assertEquals(1,result.getId());
-        assertEquals("Model 1",result.getModel());
-        assertEquals("Brand 1",result.getBrand());
-        MobilePhone notFoundPhone = inventoryManagement.getMobilePhone(3);
-        assertNull(notFoundPhone);
+    void getMobilephoneFail() {
+        UUID fakeUuid = new UUID(10, 10);
+        Assertions.assertNull(inventoryManagement.getMobilephone(fakeUuid));
     }
+
     @Test
-    void testUpdateMobilePhone() {
-        MobilePhone updatePhone = new MobilePhone(1, "Обновленный Бренд", "Обновленная Модель", 128, 300);
-        Assertions.assertTrue(inventoryManagement.updateMobilePhone(updatePhone));
-        MobilePhone updatePhone2 = new MobilePhone(4, "Обновленный Бренд", "Обновленная Модель", 128, 300);
-        Assertions.assertFalse(inventoryManagement.updateMobilePhone(updatePhone2));
+    void updateMobilePhoneSuccess() {
+        inventoryManagement.addMobilePhone(samsungGalaxyS23Ultra);
+        samsungGalaxyS23Ultra.setPrice(1000);
+        UUID id = samsungGalaxyS23Ultra.getId();
+        inventoryManagement.updateMobilePhone(id, samsungGalaxyS23Ultra);
+        Assertions.assertTrue(inventoryManagement.updateMobilePhone(id, samsungGalaxyS23Ultra));
+        MobilePhone result = inventoryManagement.getMobilephone(id);
+        Assertions.assertEquals(1000, result.getPrice());
     }
+
     @Test
-    void testDeleteMobilePhone(){
-        assertTrue(inventoryManagement.deleteMobilePhone(1));
-        assertNull(inventoryManagement.getMobilePhone(1));
-        assertFalse(inventoryManagement.deleteMobilePhone(3));
+    void updateMobilePhoneFail() {
+        UUID fakeUuid = new UUID(10, 10);
+        Assertions.assertFalse(inventoryManagement.updateMobilePhone(fakeUuid, samsungGalaxyS23Ultra));
+    }
+
+
+    @Test
+    void deleteMobilePhoneSuccess() {
+        inventoryManagement.addMobilePhone(samsungGalaxyS23Ultra);
+        Assertions.assertTrue(inventoryManagement.deleteMobilePhone(samsungGalaxyS23Ultra.getId()));
+        Assertions.assertEquals(0, inventoryManagement.getAllMobilePhones().size());
+    }
+
+
+    @Test
+    void deleteMobilePhoneFail() {
+        UUID fakeUuid = new UUID(10, 10);
+        Assertions.assertFalse(inventoryManagement.deleteMobilePhone(fakeUuid));
+    }
+
+    @Test
+    void getAllMobilePhones() {
+        inventoryManagement.addMobilePhone(samsungGalaxyS23Ultra);
+        MobilePhone iPhone15ProMax = new MobilePhone("iPhone", "15 Pro Max",
+                "IOS", 1489.99);
+        inventoryManagement.addMobilePhone(iPhone15ProMax);
+
+        Assertions.assertEquals(2, inventoryManagement.getAllMobilePhones().size());
+        Assertions.assertTrue(inventoryManagement.getAllMobilePhones().contains(samsungGalaxyS23Ultra));
+        Assertions.assertTrue(inventoryManagement.getAllMobilePhones().contains(iPhone15ProMax));
+
     }
 }

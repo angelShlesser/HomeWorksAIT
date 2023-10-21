@@ -2,61 +2,46 @@ package de.ait.homeworks37;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class InventoryManagement {
+
     private List<MobilePhone> mobilePhones = new ArrayList<>();
-    //addMobilePhone(MobilePhone phone): добавление нового мобильного телефона в список.
-    // Добавление нового мобильного телефона в список.
+
     public boolean addMobilePhone(MobilePhone phone) {
-        if (!mobilePhoneCheck(phone)) {
-            mobilePhones.add(phone);
-            return true;
-        } else {
-            System.out.println("Мобильный телефон с моделью " + phone.getModel() + " уже существует.");
-            return false;
-        }
+        return mobilePhones.add(phone);
     }
-    //добавим проверку на дубликат
-    // Проверка на дубликаты мобильных телефонов.
-    private boolean mobilePhoneCheck(MobilePhone newPhone) {
-        for (MobilePhone mobilePhone : mobilePhones) {
-            if (mobilePhone.getId() == newPhone.getId()) {
-                // Мобильный телефон с таким ID уже существует.
-                return true;
+    public MobilePhone getMobilephone(UUID id) {
+        for (MobilePhone mobilephone : mobilePhones) {
+            if (mobilephone.getId().equals(id)) {
+                return mobilephone;
             }
         }
-        return false;
-    }
-    // Поиск и получение мобильного телефона по ID.
-    public MobilePhone getMobilePhone(int id) {
-        for (MobilePhone mobilePhone : mobilePhones) {
-            if (mobilePhone.getId() == id) {
-                return mobilePhone;
-            }
-        }
-        // Мобильный телефон с заданным ID не найден.
         return null;
     }
-    // updateMobilePhone(MobilePhone phone):
-    // обновление информации о существующем мобильном телефоне.
-    public boolean updateMobilePhone(MobilePhone phone) {
-        for (int i = 0; i < mobilePhones.size(); i++) {
-            MobilePhone phoneResult = mobilePhones.get(i);
-            if (phoneResult.getId() == phone.getId()) {
-                mobilePhones.set(i, phone);
-                return true;
-            }
+    public boolean updateMobilePhone(UUID id, MobilePhone newMobilephone) {
+        MobilePhone mobilephone = getMobilephone(id);
+        if(mobilephone == null){
+            System.out.println("Телефон с ID " + id.toString() + " не найден");
+            return false;
+        }
+        else  {
+            mobilephone.setOperatingSystem(newMobilephone.getOperatingSystem());
+            mobilephone.setPrice(newMobilephone.getPrice());
+            System.out.println("Телефон с ID " + id.toString() + " найден и обновлен");
+            return true;
+        }
+
+    }
+    public boolean deleteMobilePhone(UUID id) {
+        MobilePhone phone = getMobilephone(id);
+        if (phone != null) {
+            mobilePhones.remove(phone);
+            return true;
         }
         return false;
     }
-    //deleteMobilePhone(int id): удаление мобильного телефона по ID.
-    public boolean deleteMobilePhone(int id){
-        for(MobilePhone phone:mobilePhones){
-            if(phone.getId()==id){
-                mobilePhones.remove(phone);
-                return true;
-            }
-        }
-        return false;
+    public List<MobilePhone> getAllMobilePhones(){
+        return mobilePhones;
     }
 }
