@@ -13,6 +13,7 @@ public class UniqueNamesApp {
         System.out.println("Введите имена (или введите 'стоп' для завершения):");
         while (true) {
             String input = scanner.nextLine().trim();
+            // equalsIgnoreCase изменяем для ввода не учитывать регистр (Стоп, СТОП, СтоП и тд)
             if (input.equalsIgnoreCase("стоп")) {
                 break;
             }
