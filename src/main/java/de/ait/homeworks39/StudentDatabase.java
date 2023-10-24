@@ -3,17 +3,16 @@ package de.ait.homeworks39;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class StudentDatabase {
-    HashSet<Student> studentsList;
-
-    // Конструктор для инициализации коллекции students.
-    public StudentDatabase() {
-        studentsList = new HashSet<>();
-    }
+    private Set<Student> studentsList =new HashSet<>()  ;
 
     // Метод для добавления студента в базу данных.
     public boolean addStudent(Student student) {
+        if (student == null){
+            return false;
+        }
         if (containsStudent(student)) {
             System.out.println("Не добавлен студент: " + student.getName());
             return false;
@@ -26,6 +25,9 @@ public class StudentDatabase {
 
     // Метод для удаления студента из базы данных.
     public boolean removeStudent(Student student) {
+        if (student == null){
+            return false;
+        }
         if (containsStudent(student)) {
             studentsList.remove(student);
             System.out.println("Студент удален: " + student.getName());
@@ -37,16 +39,8 @@ public class StudentDatabase {
     }
 
     // Метод для проверки, содержится ли студент в базе данных.
-    public boolean containsStudent(Student student) {
-        return studentsList.contains(student);
-    }
-
-    // Переопределенный метод toString для вывода содержимого базы данных.
-    @Override
-    public String toString() {
-        return "StudentDatabase{" +
-                "studentsList=" + studentsList +
-                '}';
+    private boolean containsStudent(Student checkStudent) {
+        return studentsList.contains(checkStudent);
     }
 
     // Метод для вывода всех студентов в базе данных.
@@ -55,10 +49,7 @@ public class StudentDatabase {
             System.out.println("Список студентов пуст.");
         } else {
             for (Student student : studentsList) {
-                System.out.println("ID: " + student.getId());
-                System.out.println("Name: " + student.getName());
-                System.out.println("Age: " + student.getAge());
-                System.out.println("-------");
+                System.out.println(student.toString());
             }
         }
     }

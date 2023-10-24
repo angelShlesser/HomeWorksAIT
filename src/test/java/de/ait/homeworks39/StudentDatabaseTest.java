@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class StudentDatabaseTest {
     private StudentDatabase studentDatabase;
     private Student studentInna;
@@ -23,34 +21,58 @@ class StudentDatabaseTest {
     }
 
     @Test
-    void testAddStudent() {
+    void testAddStudentSuccess() {
+        Assertions.assertEquals(0,studentDatabase.getStudentCount());
         Assertions.assertTrue(studentDatabase.addStudent(studentInna));
+        Assertions.assertEquals(1,studentDatabase.getStudentCount());
+    }
+    @Test
+    void testAddStudentNull() {
+        Assertions.assertFalse(studentDatabase.addStudent(null));
+    }
+    @Test
+    void testAddStudentFalse() {
+        Assertions.assertEquals(0,studentDatabase.getStudentCount());
+        studentDatabase.addStudent(studentInna);
         Assertions.assertFalse(studentDatabase.addStudent(studentInna));
+        Assertions.assertEquals(1,studentDatabase.getStudentCount());
+    }
+
+    @Test
+    void testAddDuplicateStudent() {
+        Assertions.assertTrue(studentDatabase.addStudent(studentInna));
+        Assertions.assertEquals(1, studentDatabase.getStudentCount());
+        Assertions.assertFalse(studentDatabase.addStudent(studentInna));
+        Assertions.assertEquals(1, studentDatabase.getStudentCount());
     }
 
     @Test
     void testRemoveStudent() {
+        Assertions.assertEquals(0,studentDatabase.getStudentCount());
         studentDatabase.addStudent(studentInna);
         studentDatabase.addStudent(studentSergei);
+        Assertions.assertEquals(2,studentDatabase.getStudentCount());
         Assertions.assertTrue(studentDatabase.removeStudent(studentSergei));
-        Assertions.assertFalse(studentDatabase.removeStudent(studentSergei));
+        Assertions.assertEquals(1,studentDatabase.getStudentCount());
     }
     @Test
-    void testToString() {
-        studentDatabase.addStudent(studentSergei);
-        studentDatabase.addStudent(studentInna);
-        String expected = "StudentDatabase{studentsList=[" + studentInna.toString() + ", " + studentSergei.toString() + "]}";
-        assertEquals(expected, studentDatabase.toString());
+    void testPrintAllStudentsEmptyDatabase() {
+        studentDatabase.printAllStudents();
     }
 
     @Test
     void testPrintAllStudents() {
-        // Проверяем, что база данных пуста
-        assertEquals(0, studentDatabase.studentsList.size());
         studentDatabase.addStudent(studentInna);
-        studentDatabase.addStudent(studentSergei);
-        // Проверяем, что после добавления студентов база данных содержит 2 студента
-        assertEquals(2, studentDatabase.studentsList.size());
+        studentDatabase.addStudent(studentAnna);
+        studentDatabase.printAllStudents();
+    }
+    @Test
+    void testRemoveNullStudent() {
+        Assertions.assertFalse(studentDatabase.removeStudent(null));
+    }
+    @Test
+    void testRemoveStudentEmptyDatabase() {
+        Assertions.assertFalse(studentDatabase.removeStudent(studentInna));
     }
     @Test
     void testFindStudentByName() {
