@@ -6,15 +6,35 @@ import java.util.Map;
 public class Bar {
     //Внутри этого класса создайте HashMap,
     //где ключом будет являться String (ID напитка), а значением — объект класса Drink.
-    private Map<String, Drink> drinkMap = new HashMap<>();
+    private Map<String, Drink> drinkCollection = new HashMap<>();
     //addDrink(String id, Drink drink): добавляет напиток в коллекцию.
-    public void addDrink(String id, Drink drink){
-        if (!drinkMap.containsKey(id)){
-        drinkMap.put(id,drink);
+    public boolean addDrink(String id, Drink drink){
+        if (id == null || drink == null){
+            System.err.println("Некорректные данные!");
+        return false;
+        }
+        else if (!drinkCollection.containsKey(id)){
+            System.out.println("Добавлен напиток с ID " + id + " Название " + drink.getName());
+        drinkCollection.put(id,drink);
+        return true;
+        }
+        else {
+            System.err.println("Данный напиток уже с списке:\n" + drinkCollection.get(id));
+        return false;
         }
     }
     //getDrink(String id): возвращает напиток по ID.
     public Drink getDrink(String id){
-        return drinkMap.get(id);
+        if(drinkCollection.containsKey(id)) {
+            return drinkCollection.get(id);
+        }
+        else {
+            System.out.println("Данного напитка нет в базе с ID: " + id);
+            return null;
+        }
+    }
+    public Map<String, Drink> getDrinkCollection() {
+        Map<String, Drink> drinkCollectionToReturn = new HashMap<>(drinkCollection);
+        return drinkCollectionToReturn;
     }
 }
