@@ -1,10 +1,7 @@
 package de.ait.homeworks41;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class HashMapMain {
     // Создайте объект HashMap<String, String> с названием capitalMap.
@@ -13,7 +10,7 @@ public class HashMapMain {
     public static void main(String[] args) {
         //Добавьте следующие страны и их столицы:
         //- Чехия - Прага - США - Вашингтон - Великобритания - Лондон
-        //- Франция - Париж - Германия - Берлин c. Выведите на экран размер capitalMap.
+        //- Франция - Париж - Германия - Берлин. Выведите на экран размер capitalMap.
         capitalMap.put("Чехия", "Прага");
         capitalMap.put("США", "Вашингтон");
         capitalMap.put("Великобритания", "Лондон");
@@ -29,26 +26,29 @@ public class HashMapMain {
         System.out.println("-----");
         showAllMap();
         //"Мадрид" в capitalMap как столицу Испании.
-        addOrUpdateCapital("Испания", "Мадрид");
+        addNewCountry("Испания", "Мадрид");
         System.out.println("----");
         showAllMap();
-        addOrUpdateCapital("Испания", "Бавария");
-        showAllMap();
+        addNewCountry("Испания", "Бавария");
     }
 
     private static void showAllMap() {
         System.out.println("Весь список:");
-        capitalMap.forEach((country, capital) -> {
-            System.out.println("Страна: " + country + ", Столица: " + capital);
-        });
+        capitalMap.forEach((country, capital) -> System.out.println("Страна: " + country + ", Столица: " + capital));
     }
 
-    private static void addOrUpdateCapital(String country, String capital) {
-        if (!capitalMap.containsKey(country)) {
-            capitalMap.put(country, capital);
-            System.out.println("В список HashMap добавлена столица для страны: " + country);
+    private static boolean checkCountry(String countryNameKey) {
+        return capitalMap.containsKey(countryNameKey);
+    }
+
+    private static boolean addNewCountry(String countryNameKey, String countryNameValue) {
+        if (!checkCountry(countryNameKey)) {
+            capitalMap.put(countryNameKey, countryNameValue);
+            System.out.println("Страна успешно добавлена " + countryNameKey + " --> " + countryNameValue);
+            return true;
         } else {
-            System.out.println("В списке уже есть столица для страны: " + country);
+            System.out.println("Страна уже есть в списке " + countryNameKey);
+            return false;
         }
     }
 }

@@ -20,6 +20,7 @@ public class HashSetMain {
         // Выведите на экран все элементы countriesSet.
         System.out.println("------");
         showAllCountries();
+        addNewCountry("Франция");
     }
 
     private static void showAllCountries() {
@@ -30,12 +31,18 @@ public class HashSetMain {
     }
 
     ////Проверьте, содержит ли countriesSet страну "Испания".
-    private static void addCountries(String countries) {
-        if (!countriesSet.contains(countries)) {
-            countriesSet.add(countries);
-            System.out.println("В список HashSet добавлена " + countries);
+    private static boolean checkCountry(String countryNameKey) {
+        return countriesSet.contains(countryNameKey);
+    }
+
+    private static boolean addNewCountry(String countryNameKey) {
+        if (!checkCountry(countryNameKey)) {
+            countriesSet.add(countryNameKey);
+            System.out.println("Страна успешно добавлена " + countryNameKey);
+            return true;
         } else {
-            System.out.println("В списке уже есть: " + countries);
+            System.out.println("Страна не добавлена " + countryNameKey);
+            return false;
         }
     }
 }
