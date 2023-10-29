@@ -1,12 +1,15 @@
 package de.ait.homeworks41;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayListMain {
     // Создайте объект ArrayList<String> с названием countriesList.
     private static List<String> countriesList = new ArrayList<>();
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArrayListMain.class);
     public static void main(String[] args) {
         //Добавьте в countriesList следующие страны:
         //США, Великобритания, Франция, Чехия, Германия, Франция
@@ -17,24 +20,21 @@ public class ArrayListMain {
         countriesList.add("Германия");
         countriesList.add("Франция");
         //Выведите на экран размер countriesList.
-        System.out.println("Размер countriesList: " + countriesList.size());
+        LOGGER.info("Размер countriesList: {}",countriesList.size());
         //Выведите на экран все элементы countriesList в исходном порядке.
         showAllCountries();
-        System.out.println("=====");
         //Поиск и удаление дубликатов
         removeDuplicates();
         //Вывод список без дубликатов
-        System.out.println("======");
         showAllCountries();
         //Вывод размера после удаления дубликатов
-        System.out.println("======");
-        System.out.println("Размер countriesList: " + countriesList.size());
+        LOGGER.info("Размер countriesList: {}",countriesList.size());
         }
     //Метод для вывода всей countriesList
     private static void showAllCountries(){
-        System.out.println("Выводим весь countriesList:");
+        LOGGER.info("Выводим весь countriesList:");
         for (String countries : countriesList) {
-            System.out.println(countries);
+            LOGGER.info(countries);
         }
     }
     //Метод для удаления дубликатов countriesList
@@ -47,6 +47,6 @@ public class ArrayListMain {
             }
         }
         countriesList= new ArrayList<>(uniqueCountries);
-        System.out.println("Дубликаты были удалены");
+        LOGGER.info("Дубликаты были удалены");
     }
 }

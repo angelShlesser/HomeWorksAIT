@@ -18,6 +18,22 @@ public class Post {
         this.content = content;
         this.author = author;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
     /*
     equals(Object obj): переопределите, чтобы сравнивать посты по id.
     hashCode(): переопределите в соответствии с equals.

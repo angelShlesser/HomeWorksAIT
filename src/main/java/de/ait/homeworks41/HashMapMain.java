@@ -1,11 +1,15 @@
 package de.ait.homeworks41;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class HashMapMain {
     // Создайте объект HashMap<String, String> с названием capitalMap.
     private static Map<String, String> capitalMap = new HashMap<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(HashMapMain.class);
 
     public static void main(String[] args) {
         //Добавьте следующие страны и их столицы:
@@ -17,24 +21,21 @@ public class HashMapMain {
         capitalMap.put("Франция", "Париж");
         capitalMap.put("Германия", "Берлин");
         //Выведите на экран размер capitalMap.
-        System.out.println("Размер capitalMap: " + capitalMap.size());
+        LOGGER.info("Размер capitalMap: {}",capitalMap.size());
         //Используя цикл, выведите все пары страна-столица из capitalMap
-        System.out.println("------");
         showAllMap();
         //Замените столицу США с Вашингтона на Сан-Франциско и выведите capitalMap снова.
         capitalMap.replace("США", "Сан-Франциско");
-        System.out.println("-----");
         showAllMap();
         //"Мадрид" в capitalMap как столицу Испании.
         addNewCountry("Испания", "Мадрид");
-        System.out.println("----");
         showAllMap();
         addNewCountry("Испания", "Бавария");
     }
 
     private static void showAllMap() {
-        System.out.println("Весь список:");
-        capitalMap.forEach((country, capital) -> System.out.println("Страна: " + country + ", Столица: " + capital));
+        LOGGER.info("Весь список:");
+        capitalMap.forEach((country, capital) -> LOGGER.info("Страна: {}, Столица: {}",country, capital));
     }
 
     private static boolean checkCountry(String countryNameKey) {
@@ -44,10 +45,10 @@ public class HashMapMain {
     private static boolean addNewCountry(String countryNameKey, String countryNameValue) {
         if (!checkCountry(countryNameKey)) {
             capitalMap.put(countryNameKey, countryNameValue);
-            System.out.println("Страна успешно добавлена " + countryNameKey + " --> " + countryNameValue);
+            LOGGER.info("Страна успешно добавлена {} --> {}",countryNameKey, countryNameValue);
             return true;
         } else {
-            System.out.println("Страна уже есть в списке " + countryNameKey);
+            LOGGER.info("Страна уже есть в списке {}",countryNameKey);
             return false;
         }
     }

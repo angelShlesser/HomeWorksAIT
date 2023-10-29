@@ -1,12 +1,15 @@
 package de.ait.homeworks41;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class HashSetMain {
     //Создайте объект HashSet<String> с названием countriesSet.
     private static Set<String> countriesSet = new HashSet<>();
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(HashSetMain.class);
     public static void main(String[] args) {
         //Добавьте в countriesSet те же страны, что и в countriesList.
         countriesSet.add("США");
@@ -16,17 +19,17 @@ public class HashSetMain {
         countriesSet.add("Германия");
         countriesSet.add("Франция");
         // Выведите на экран размер countriesSet.
-        System.out.println("Размер HashSet: " + countriesSet.size());
+        LOGGER.info("Размер HashSet: {}",countriesSet.size());
         // Выведите на экран все элементы countriesSet.
-        System.out.println("------");
+        LOGGER.info("------");
         showAllCountries();
         addNewCountry("Франция");
     }
 
     private static void showAllCountries() {
-        System.out.println("Элементы HashSet:");
+        LOGGER.info("Элементы HashSet:");
         for (String country : countriesSet) {
-            System.out.println(country);
+            LOGGER.info(country);
         }
     }
 
@@ -38,10 +41,10 @@ public class HashSetMain {
     private static boolean addNewCountry(String countryNameKey) {
         if (!checkCountry(countryNameKey)) {
             countriesSet.add(countryNameKey);
-            System.out.println("Страна успешно добавлена " + countryNameKey);
+            LOGGER.info("Страна успешно добавлена {}",countryNameKey);
             return true;
         } else {
-            System.out.println("Страна не добавлена " + countryNameKey);
+            LOGGER.error("Страна не добавлена {}",countryNameKey);
             return false;
         }
     }
