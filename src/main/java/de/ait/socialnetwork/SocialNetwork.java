@@ -1,4 +1,4 @@
-package de.ait.test41_5;
+package de.ait.socialnetwork;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

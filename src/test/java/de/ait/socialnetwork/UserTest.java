@@ -1,4 +1,4 @@
-package de.ait.test41_5;
+package de.ait.socialnetwork;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
