@@ -18,48 +18,51 @@ public class SocialNetwork {
     posts: ArrayList<Post> – список всех постов.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SocialNetwork.class);
-    private Map<Integer, User> users =new HashMap<>();
-    private Map<Integer, Group> groups =new HashMap<>();
+    private Map<Integer, User> users = new HashMap<>();
+    private Map<Integer, Group> groups = new HashMap<>();
     private List<Post> posts = new ArrayList<>();
     private int nextPostId = 1;
+
     //registerUser(int id, String name): регистрирует нового пользователя,
     //добавляет пользователя в users и возвращает созданного пользователя.
-    public User registerUser(int id, String name){
+    public User registerUser(int id, String name) {
         //name null
-        if (name == null ){
-            LOGGER.error("Имя {} не доcтупно",name);
+        if (name == null) {
+            LOGGER.error("Имя {} не доcтупно", name);
             return null;
         }
         //проверка уникального пользователя
-        for(Map.Entry<Integer,User> user: users.entrySet()){
-            if(user.getKey().equals(Integer.valueOf(id))){
+        for (Map.Entry<Integer, User> user : users.entrySet()) {
+            if (user.getKey().equals(Integer.valueOf(id))) {
                 LOGGER.error("Пользователь с id {} уже есть", id);
                 return null;
             }
         }
-        User user = new User(id,name);
-        LOGGER.info("Зарегистрирован пользователь с именем {} и id {}",name,id);
-        return users.put(id,user);
+        User user = new User(id, name);
+        LOGGER.info("Зарегистрирован пользователь с именем {} и id {}", name, id);
+        return users.put(id, user);
     }
+
     //createGroup(int id, String name): создает новую группу, добавляет группу в
     //groups и возвращает созданную группу.
     public Group createGroup(int id, String name) {
         //Проверим на null
-        if (name == null){
+        if (name == null) {
             LOGGER.error("Не допустимое название группы {}", name);
             return null;
         }
         //проверим нет ли уже с таким id группы
-        for (Map.Entry<Integer,Group> group:groups.entrySet()){
-            if(group.getKey().equals(Integer.valueOf(id))){
+        for (Map.Entry<Integer, Group> group : groups.entrySet()) {
+            if (group.getKey().equals(Integer.valueOf(id))) {
                 LOGGER.error("Группа с таким id {} уже есть", id);
                 return null;
             }
         }
         Group newGroup = new Group(id, name);
-        LOGGER.info("Зарегистрирована группа с именем {} и id {}",name,id);
+        LOGGER.info("Зарегистрирована группа с именем {} и id {}", name, id);
         return groups.put(id, newGroup);
     }
+
     //createPost(User author, String content): создает новый пост от имени
     //пользователя и добавляет его в posts.
     public Post createPost(User author, String content) {
@@ -68,15 +71,17 @@ public class SocialNetwork {
             LOGGER.error("Недопустимое значение автора или содержания поста.");
             return null;
         }
-        Post postResult = new Post(generateUniquePostId(),content,author);
+        Post postResult = new Post(generateUniquePostId(), content, author);
         posts.add(postResult);
-        LOGGER.info("Пост создан {}",postResult.getId());
+        LOGGER.info("Пост создан {}", postResult.getId());
         return postResult;
     }
+
     //для генерации постов id
-    private int generateUniquePostId(){
-    return nextPostId++;
+    private int generateUniquePostId() {
+        return nextPostId++;
     }
+
     public List<User> getFriends(User user) {
         if (!user.getFriends().isEmpty()) {
             List<User> friendsList = new ArrayList<>();
@@ -85,7 +90,7 @@ public class SocialNetwork {
             return friendsList;
 
         }
-            LOGGER.info("Список друзей c id {} пуст", user.getId());
+        LOGGER.info("Список друзей c id {} пуст", user.getId());
         return null;
     }
 

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,10 +29,6 @@ public class Group {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -53,11 +48,10 @@ public class Group {
             LOGGER.error("Пользователь равен null");
             return false;
         }
-        if(!members.contains(user)){
+        if (!members.contains(user)) {
             LOGGER.info("Новый пользователь с id {} добавлен", user.getId());
             return members.add(user);
-        }
-        else {
+        } else {
             LOGGER.error("Пользователь с id {} уже существует", user.getId());
             return false;
         }
@@ -78,6 +72,7 @@ public class Group {
     public int hashCode() {
         return Objects.hash(id);
     }
+
     public boolean hasMember(User user) {
         return members.contains(user);
     }

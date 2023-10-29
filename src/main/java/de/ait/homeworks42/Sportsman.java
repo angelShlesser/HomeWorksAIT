@@ -3,9 +3,6 @@ package de.ait.homeworks42;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Sportsman {
     /*
      a. Создайте класс Sportsman со следующими полями:
@@ -19,6 +16,7 @@ public class Sportsman {
     private String sport; //Вид спорта
     private int records; //рекорд спортсмена
     private static final Logger LOGGER = LoggerFactory.getLogger(Sportsman.class);
+
     public Sportsman(String name, int age, String sport, int records) {
         this.name = name;
         this.age = age;
@@ -53,6 +51,7 @@ public class Sportsman {
     public void setRecords(int records) {
         this.records = records;
     }
+
     @Override
     public String toString() {
         return "Sportsman{" +
@@ -62,27 +61,27 @@ public class Sportsman {
                 ", records=" + records +
                 '}';
     }
+
     // c. Реализуйте метод updateRecord(int newRecord),
     // который будет обновлять рекорд спортсмена, если newRecord больше текущего рекорда.
     public boolean updateRecord(int newRecord) {
         if (newRecord > records) {
             setRecords(newRecord);
-            LOGGER.info("Новый рекорд установлен: {}-->{}", getName(), newRecord);
+            LOGGER.info("Новый рекорд установлен: {} --> {}", getName(), newRecord);
             return true;
-        }
-        else {
-            LOGGER.info("Попытка уставить новый рекорд {} не получилось. ({})",getName(),getRecords());
+        } else {
+            LOGGER.info("Попытка уставить новый рекорд {} не получилось. ({})", getName(), getRecords());
             return false;
         }
     }
+
     //Реализуйте метод isEligibleForCompetition(int minAge, int maxAge), который проверяет,
     //соответствует ли возраст спортсмена допустимому диапазону для участия в соревнованиях.
     public boolean isEligibleForCompetition(int minAge, int maxAge) {
-        if(age >= minAge && age <= maxAge){
-            LOGGER.info("Возраст соответствует для участия соревнования {}",getName());
+        if (age >= minAge && age <= maxAge) {
+            LOGGER.info("Возраст соответствует для участия соревнования {}", getName());
             return true;
-        }
-        else {
+        } else {
             LOGGER.error("Не соответствует для участия в соревнованиях {}", getName());
             return false;
         }
