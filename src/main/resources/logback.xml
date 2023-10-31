@@ -1,6 +1,14 @@
 <configuration>
-    <!-- Консольный аппендер -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+    <!-- Консольный аппендер для INFO -->
+    <appender name="STDOUT_INFO" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Консольный аппендер для ERROR -->
+    <appender name="STDOUT_ERROR" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
@@ -24,7 +32,12 @@
 
     <!-- Уровни логирования и ассоциированные аппендеры -->
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT_INFO"/>
     </root>
+
+    <!-- Уровень ERROR и ассоциированный аппендер -->
+    <logger name="com.example.yourpackage" level="ERROR">
+        <appender-ref ref="STDOUT_ERROR"/>
+    </logger>
+
 </configuration>
