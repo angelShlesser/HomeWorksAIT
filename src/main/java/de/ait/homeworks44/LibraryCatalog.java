@@ -11,40 +11,70 @@ public class LibraryCatalog {
     private static final Logger LOGGER = LoggerFactory.getLogger(LibraryCatalog.class);
     private List<Book> bookList = new ArrayList<>();
 
-    public void addBook(Book book) {
-        if (!bookList.contains(book)) {
-            bookList.add(book);
-            LOGGER.info("Книга добавлена: {}", book.getTitle());
+    public boolean addBook(Book addBook) {
+        if (bookList == null) {
+            LOGGER.error("Книга с названием null");
+            return false;
         } else {
-            LOGGER.error("Книга уже существует в каталоге: {}", book.getTitle());
+            LOGGER.info("Книга добавлена: {}", addBook.getTitle());
+            return bookList.add(addBook);
         }
     }
 
-    public void removeBook(String title) {
+    public boolean removeBook(String isbn) {
+        int counter = 0;
+        if(isbn == null){
+            LOGGER.error("Введен Null");
+            return false;
+        }
         Iterator<Book> iterator = bookList.iterator();
         while (iterator.hasNext()) {
             Book book = iterator.next();
-            if (book.getTitle().equals(title)) {
+            if (book.getIsbn().equals(isbn)) {
+                counter++;
                 iterator.remove();
-                LOGGER.info("Книга с названием '{}' была удалена из каталога.", title);
-                return;
+                LOGGER.info("Книга с названием '{}' была удалена из каталога. ISBN {}", book.getTitle(), isbn);
             }
         }
-        LOGGER.error("Книга с названием '{}' не найдена в каталоге.", title);
-    }
-
-    public Book findBookByTitle(String title) {
-        for (Book book : bookList) {
-            if (book.getTitle().equals(title)) {
-                LOGGER.info("Книга найдена: {}", title);
-                return book;
-            }
+        if (counter == 0 ){
+            LOGGER.warn("Книга с isbn '{}' не найдена в каталоге.", isbn);
+            return false;
         }
-        LOGGER.error("Книга не найдена: {}", title);
-        return null;
+        else {
+            LOGGER.info("Было удалено {} с ISBN {}", counter, isbn);
+            return true;
+        }
     }
 
-    public List<Book> listAllBooks() {
+    public List<Book> findBookByTitle(String title) {
+        List<Book> booksToReturn = new ArrayList<>();
+        if (title == null) {
+            LOGGER.error("Книга с названием null");
+            return null;
+        } else {
+
+            for (Book book : bookList) {
+                if (book.getTitle().equals(title)) {
+                    LOGGER.info("Книга с название {} найдена", title);
+                    booksToReturn.add(book);
+                }
+            }
+            LOGGER.info("Было найдено {} книг с названием {}", booksToReturn.size(),title);
+            return booksToReturn;
+        }
+    }
+    public void listAllBooks() {
+       if(bookList.isEmpty()){
+           LOGGER.warn("В библиотеке нет книг");
+       }
+       else {
+           for (Book book: bookList){
+               LOGGER.info(book.toString());
+           }
+       }
+    }
+
+    public List<Book> getBookList() {
         return new ArrayList<>(bookList);
     }
 }

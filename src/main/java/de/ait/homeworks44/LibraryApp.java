@@ -3,13 +3,8 @@ package de.ait.homeworks44;
 import java.util.Scanner;
 
 public class LibraryApp {
-    private LibraryCatalog catalog;
-    private Scanner scanner;
-
-    public LibraryApp() {
-        catalog = new LibraryCatalog();
-        scanner = new Scanner(System.in);
-    }
+    private LibraryCatalog catalog = new LibraryCatalog();
+    private Scanner scanner = new Scanner(System.in);
 
     public void run() {
         boolean isRunning = true;
@@ -56,43 +51,51 @@ public class LibraryApp {
         String author = scanner.nextLine();
         System.out.print("Введите год книги: ");
         int year = Integer.parseInt(scanner.nextLine());
+        System.out.print("Введите isbn книги: ");
+        String isbn = scanner.nextLine();
 
-        Book book = new Book(title, author, year);
+        Book book = new Book(title, author, year, isbn);
         catalog.addBook(book);
-        System.out.println("Книга добавлена.");
     }
 
     private void removeBook() {
         System.out.print("Введите название книги для удаления: ");
         String title = scanner.nextLine();
-
         catalog.removeBook(title);
-        System.out.println("Книга удалена.");
     }
 
     private void findBookByTitle() {
         System.out.print("Введите название книги для поиска: ");
         String title = scanner.nextLine();
 
-        Book foundBook = catalog.findBookByTitle(title);
+        catalog.findBookByTitle(title);
 
-        if (foundBook != null) {
-            System.out.println("Найдена книга: " + foundBook.getTitle() + " (Автор: " + foundBook.getAuthor() + ")");
-        } else {
-            System.out.println("Книга не найдена.");
-        }
     }
 
     private void listAllBooks() {
         System.out.println("Список всех книг:");
-        for (Book book : catalog.listAllBooks()) {
-            System.out.println(book.getTitle() + " (Автор: " + book.getAuthor() + ")");
-        }
+        catalog.listAllBooks();
     }
 
     public static void main(String[] args) {
         LibraryApp app = new LibraryApp();
-        app.run();
+        Book book1 = new Book("Думай и богатей", "Наполеон Хилл", 1937, "1234567890");
+        Book book2 = new Book("Мастер и Маргарита", "Михаил Булгаков", 1967, "9876543210");
+        Book book3 = new Book("1984", "Джордж Оруэлл", 1949, "5555555555");
+        Book book4 = new Book("Преступление и наказание", "Федор Достоевский", 1866, "4444444444");
+        Book book5 = new Book("Война и мир", "Лев Толстой", 1869, "1111111111");
+        LibraryCatalog libraryCatalog = new LibraryCatalog();
+        libraryCatalog.addBook(book1);
+        libraryCatalog.addBook(book2);
+        libraryCatalog.addBook(book3);
+        libraryCatalog.addBook(book4);
+        libraryCatalog.addBook(book5);
+        libraryCatalog.addBook(book3);
+        libraryCatalog.listAllBooks();
+        libraryCatalog.findBookByTitle("1984");
+        libraryCatalog.removeBook("5555555555");
+        System.out.println("Количество книг: " + libraryCatalog.getBookList().size());
+        //app.run();
     }
 }
 
