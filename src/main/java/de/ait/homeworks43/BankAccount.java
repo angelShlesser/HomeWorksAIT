@@ -59,7 +59,7 @@ public class BankAccount {
     }
 
     public double checkBalance() {
-        LOGGER.info("Запрос баланса для аккаунта {}", owner);
+        LOGGER.warn("Запрос баланса для аккаунта {}", owner);
         return balance;
     }
 }
