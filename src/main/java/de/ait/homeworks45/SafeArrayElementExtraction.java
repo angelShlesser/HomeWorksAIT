@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 public class SafeArrayElementExtraction {
-    private static final Logger log = LoggerFactory.getLogger(SafeArrayElementExtraction.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SafeArrayElementExtraction.class);
     public static void main(String[] args) {
         String[] array = {"Apple", "Banana", "Cherry", "Date", "Fig"};
         Scanner scanner = new Scanner(System.in);
@@ -19,19 +19,19 @@ public class SafeArrayElementExtraction {
                 String element = safeExtractElement(array, index);
 
                 if (element != null) {
-                    log.info("Извлеченный элемент: " + element);
+                    LOGGER.info("Извлеченный элемент: {}",element);
                 }
             } catch (NumberFormatException exception) {
-                log.error("Не верный формат индекса массива");
+                LOGGER.error("Не верный формат индекса массива");
             } finally {
-                log.info("Операция поиска завершена.");
+                LOGGER.info("Операция поиска завершена.");
             }
         }
     }
 
     public static String safeExtractElement(String[] array, int index) {
         if (array == null) {
-            log.info("Массив отсутствует.");
+            LOGGER.info("Массив отсутствует.");
             return null;
         }
 
@@ -41,7 +41,7 @@ public class SafeArrayElementExtraction {
             }
             return array[index];
         } catch (ArrayIndexOutOfBoundsException exception) {
-            log.warn("Введено число за пределами массива");
+            LOGGER.warn("Введено число за пределами массива");
         }
         return null;
     }
