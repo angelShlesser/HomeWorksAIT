@@ -18,6 +18,7 @@ public class BankAccount {
     }
 
     public double getBalance() {
+        LOGGER.info("Баланс {}", balance);
         return balance;
     }
 

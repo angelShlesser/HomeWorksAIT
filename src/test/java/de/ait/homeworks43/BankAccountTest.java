@@ -1,11 +1,13 @@
 package de.ait.homeworks43;
 
+import nl.altindag.log.LogCaptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankAccountTest {
+    LogCaptor logCaptor = LogCaptor.forClass(BankAccount.class);
     private BankAccount bankAccountAlex;
     private BankAccount bankAccountLiza;
 
@@ -28,15 +30,23 @@ class BankAccountTest {
 
     @Test
     void setBalance() {
+        logCaptor.setLogLevelToInfo();
         bankAccountLiza.setBalance(500.0);
         assertEquals(500.0, bankAccountLiza.getBalance());
-    }
+        String resultMassage = "Баланс 500.0";
+        assertTrue(logCaptor.getInfoLogs().contains(resultMassage));
+            }
 
     @Test
     void deposit() {
+        logCaptor.setLogLevelToInfo();
         assertTrue(bankAccountAlex.deposit(500));
+        String result = "Пополнение баланса у владельца Lio, на 500.0. Всего на счету 900.0.";
+        assertTrue(logCaptor.getInfoLogs().contains(result));
         bankAccountLiza.setBalance(-100);
+        result = "Ошибка пополнения баланса.";
         assertFalse(bankAccountLiza.deposit(10));
+        assertFalse(logCaptor.getInfoLogs().contains(result));
     }
 
     @Test
