@@ -4,19 +4,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
-import java.util.SortedMap;
 
 public class SafeArrayElementExtraction {
     private static final Logger LOGGER = LoggerFactory.getLogger(SafeArrayElementExtraction.class);
     private static Scanner scanner = new Scanner(System.in);
     private static String[] array;
+
     public static void main(String[] args) {
         createAndPopulateArray();
         scanner.close();
-
     }
 
-    private static String safeExtractElement(String[] array, int index) {
+    public static String safeExtractElement(String[] array, int index) {
         if (array == null) {
             LOGGER.info("Массив отсутствует.");
             return null;
@@ -32,6 +31,7 @@ public class SafeArrayElementExtraction {
         }
         return null;
     }
+
     public static void processUserInput() {
         while (true) {
             System.out.print("Введите элемента для извлечения от 1 до 5 (или 'exit' для завершения): ");
@@ -57,12 +57,13 @@ public class SafeArrayElementExtraction {
             }
         }
     }
-    public  static void createAndPopulateArray(){
+
+    public static void createAndPopulateArray() {
         array = new String[5];
         System.out.println("Заполните массив (5 элементов):");
-        for (int i = 0; i < array.length; i++){
+        for (int i = 0; i < array.length; i++) {
             array[i] = scanner.nextLine();
-            LOGGER.info("Добавлен {} элемент массива: {}",i+1,array[i]);
+            LOGGER.info("Добавлен {} элемент массива: {}", i + 1, array[i]);
         }
         LOGGER.info("Создание массива завершено.");
         processUserInput();
