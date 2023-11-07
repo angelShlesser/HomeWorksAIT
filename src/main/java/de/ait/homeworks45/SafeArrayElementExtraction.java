@@ -12,7 +12,6 @@ public class SafeArrayElementExtraction {
 
     public static void main(String[] args) {
         createAndPopulateArray();
-        scanner.close();
     }
 
     public static void processUserInput() {
@@ -29,10 +28,7 @@ public class SafeArrayElementExtraction {
                 int result = Integer.parseInt(input);
                 int index = result - 1;
                 String element = array[index];
-
-                if (element != null) {
-                    LOGGER.info("Извлеченный элемент: {}", element);
-                }
+                LOGGER.info("Извлеченный элемент: {}", element);
             } catch (ArrayIndexOutOfBoundsException exception) {
                 LOGGER.error("ERROR. Введено число за пределами массива");
             } catch (NumberFormatException exception) {
@@ -41,6 +37,7 @@ public class SafeArrayElementExtraction {
                 LOGGER.info("Операция поиска завершена.");
             }
         }
+        scanner.close();
     }
 
     public static void createAndPopulateArray() {
