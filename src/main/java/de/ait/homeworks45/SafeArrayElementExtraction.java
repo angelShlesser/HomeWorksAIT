@@ -33,6 +33,8 @@ public class SafeArrayElementExtraction {
                 LOGGER.error("ERROR. Введено число за пределами массива");
             } catch (NumberFormatException exception) {
                 LOGGER.error("Не верный формат индекса массива");
+            } catch (Exception exception) {
+                LOGGER.error("Неизвестная ошибка!", exception);
             } finally {
                 LOGGER.info("Операция поиска завершена.");
             }
