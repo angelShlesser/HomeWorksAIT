@@ -8,42 +8,49 @@ import java.util.Scanner;
 public class CurrencyConverterOnline {
     private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyConverterOnline.class);
     private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
             System.out.println("Введите сумму для конвертации:");
             String amount = scanner.nextLine();
-            System.out.println("Введите исходную валюты (USD или EURO):");
+            System.out.println("Введите исходную валюту (USD или EURO):");
             String currency = scanner.nextLine();
-            System.out.println("Введите целевую валюты (USD или EURO):");
+            System.out.println("Введите целевую валюту (USD или EURO):");
             String targetCurrency = scanner.nextLine();
             double result = convertCurrency(amount, targetCurrency, currency);
             System.out.println("Результат конвертации: " + result);
     }
 
+    /**
+     * Метод для конвертации суммы из одной валюты в другую.
+     *
+     * @param amount         Сумма для конвертации.
+     * @param targetCurrency Целевая валюта.
+     * @param currency       Исходная валюта.
+     * @return Результат конвертации.
+     */
     public static double convertCurrency(String amount, String targetCurrency, String currency) {
-        // Флаг для отслеживания валидности ввода
-        boolean isInputValid = false;
-        double convertResult = 0;
+        boolean isInputValid = false; // Флаг для отслеживания валидности ввода
+        double convertResult = 0; // Результат конвертации
 
         // Запускаем цикл до тех пор, пока ввод не будет валидным
         while (!isInputValid) {
             try {
-                // Преобразуем введенную сумму в число
                 double amountDouble = Double.parseDouble(amount);
                 LOGGER.info("Получена сумма для конвертации: {}.", amountDouble);
 
                 // Проверяем валидность целевой валюты
-                if (!targetCurrency.equals("USD") && !targetCurrency.equals("EURO")) {
+                if (!targetCurrency.equalsIgnoreCase("USD") && !targetCurrency.equalsIgnoreCase("EURO")) {
                     throw new IllegalArgumentException("Несуществующий код целевой валюты.");
                 }
 
                 // Проверяем валидность исходной валюты
-                if (!currency.equals("USD") && !currency.equals("EURO")) {
+                if (!currency.equalsIgnoreCase("USD") && !currency.equalsIgnoreCase("EURO")) {
                     throw new IllegalArgumentException("Несуществующий код исходной валюты.");
                 }
 
                 // Выполняем конвертацию в зависимости от исходной валюты
-                if (currency.equals("USD")) {
+                if (currency.equalsIgnoreCase(targetCurrency)) {
+                    LOGGER.info("Конвертация в ту же самую валюту.");
+                } else if (currency.equalsIgnoreCase("USD")) {
                     convertResult = amountDouble * 0.85;
                     LOGGER.info("Конвертация в USD: {}", convertResult);
                 } else {
@@ -53,14 +60,16 @@ public class CurrencyConverterOnline {
 
                 // Устанавливаем флаг валидности ввода
                 isInputValid = true;
+
             } catch (NumberFormatException exception) {
                 System.out.println("Ошибка: Введено не числовое значение. Введите сумму для конвертации:");
                 LOGGER.error("Недопустимый формат: {}", amount, exception);
-                // Повторный ввод суммы в случае ошибки
-                amount = scanner.nextLine();
+                amount = scanner.nextLine(); // Повторный ввод суммы в случае ошибки
+
             } catch (IllegalArgumentException exception) {
                 System.out.println("Ошибка: " + exception.getMessage());
-                LOGGER.error("Ошибка ввода валюты: {}", exception.getMessage());
+                LOGGER.error("Ошибка ввода: {}", exception.getMessage());
+
                 // Повторный ввод валюты в случае ошибки
                 if (exception.getMessage().contains("целевой")) {
                     System.out.println("Введите целевую валюту (USD или EURO):");
