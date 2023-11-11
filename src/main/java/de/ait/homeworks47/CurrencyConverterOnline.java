@@ -17,6 +17,7 @@ public class CurrencyConverterOnline {
             String targetCurrency = scanner.nextLine();
             double result = convertCurrency(amount, targetCurrency, currency);
             System.out.println("Результат конвертации: " + result);
+            scanner.close();
     }
 
     /**
@@ -35,6 +36,9 @@ public class CurrencyConverterOnline {
         while (!isInputValid) {
             try {
                 double amountDouble = Double.parseDouble(amount);
+                if (amountDouble < 0) {
+                    throw new IllegalArgumentException("Сумма не может быть отрицательной.");
+                }
                 LOGGER.info("Получена сумма для конвертации: {}.", amountDouble);
 
                 // Проверяем валидность целевой валюты
