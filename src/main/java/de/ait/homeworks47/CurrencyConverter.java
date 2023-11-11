@@ -8,42 +8,43 @@ import java.util.Scanner;
 
 public class CurrencyConverter {
     private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyConverter.class);
-    private static final double USD_RATE = 1.2;
-    private static final double EURO_RATE = 0.85;
+    private static final double usdRate = 1.2;
+    private static final double euroRate = 0.85;
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        convertCurrency();
+        performCurrencyConversion();
     }
 
-    private static void convertCurrency() {
+    private static void performCurrencyConversion() {
         double amount = scannerUser();
-        String core;
+        String currencyCode;
         double result;
 
         while (true) {
-            System.out.println("Введите валюту для конвертации (например, usd, euro):");
-            core = scanner.nextLine().toLowerCase();
+            System.out.println("Введите код валюты для конвертации (например, usd, euro):");
+            currencyCode = scanner.nextLine().toLowerCase();
 
             try {
-                switch (core) {
+                switch (currencyCode) {
                     case "usd":
-                        result = convert(amount, USD_RATE);
+                        result = convert(amount, usdRate);
                         break;
                     case "euro":
-                        result = convert(amount, EURO_RATE);
+                        result = convert(amount, euroRate);
                         break;
                     default:
-                        LOGGER.error("Некорректный код валюты: {}", core);
-                        throw new IllegalArgumentException("Некорректный код валюты: " + core);
+                        LOGGER.error("Некорректный код валюты: {}", currencyCode);
+                        throw new IllegalArgumentException("Некорректный код валюты: " + currencyCode);
                 }
 
-                LOGGER.info("Выполнена конвертация: {}", result);
-                System.out.println("Конвертация: " + result);
+                LOGGER.info("Выполнена конвертация {} {} в {} {}", amount, currencyCode.toUpperCase(), result, getTargetCurrencyName(currencyCode));
+                System.out.println("Конвертация " + amount + " " + currencyCode.toUpperCase() + " в " + result + " " + getTargetCurrencyName(currencyCode));
                 break; // Выходим из цикла после успешной конвертации
 
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: " + e.getMessage());
+                LOGGER.warn("Повторный ввод кода валюты после ошибки.");
                 scanner.nextLine(); // Сбросить буфер после ошибки
             }
         }
@@ -74,5 +75,13 @@ public class CurrencyConverter {
 
     private static double convert(double amount, double rate) {
         return amount * rate;
+    }
+
+    private static String getTargetCurrencyName(String currencyCode) {
+        if (currencyCode.equals("usd")) {
+            return "euro";
+        } else {
+            return "usd";
+        }
     }
 }
