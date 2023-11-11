@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class CurrencyConverter {
     private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyConverter.class);
-    private static final double USD = 1.2;
-    private static final double EURO = 0.85;
+    private static final double USD_RATE = 1.2;
+    private static final double EURO_RATE = 0.85;
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -28,10 +28,10 @@ public class CurrencyConverter {
             try {
                 switch (core) {
                     case "usd":
-                        result = amount * USD;
+                        result = convert(amount, USD_RATE);
                         break;
                     case "euro":
-                        result = amount * EURO;
+                        result = convert(amount, EURO_RATE);
                         break;
                     default:
                         LOGGER.error("Некорректный код валюты: {}", core);
@@ -44,8 +44,11 @@ public class CurrencyConverter {
 
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: " + e.getMessage());
+                scanner.nextLine(); // Сбросить буфер после ошибки
             }
         }
+
+        System.out.println("Операция конвертации завершена.");
     }
 
     private static double scannerUser() {
@@ -67,5 +70,9 @@ public class CurrencyConverter {
         }
 
         return result;
+    }
+
+    private static double convert(double amount, double rate) {
+        return amount * rate;
     }
 }
