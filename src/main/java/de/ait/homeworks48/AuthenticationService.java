@@ -48,4 +48,8 @@ public class AuthenticationService {
         registeredUsers.add(user);
         LOGGER.info("Пользователь успешно зарегистрирован: {}", user.getUsername());
     }
+    public List<User> getRegisteredUsers() {
+        return registeredUsers;
+    }
+
 }

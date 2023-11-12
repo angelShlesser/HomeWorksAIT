@@ -31,7 +31,7 @@ public class BankAccount {
      *
      * @param amount Сумма для пополнения.
      */
-    private void deposit(double amount) {
+    public void deposit(double amount) {
         balance += amount;
         LOGGER.info("Пополнение баланса на {}", amount);
     }
@@ -42,12 +42,13 @@ public class BankAccount {
      * @param amount Сумма для снятия.
      * @throws InsufficientFundsException Если сумма снятия больше баланса.
      */
-    private void withdraw(double amount) {
+    public void withdraw(double amount) {
         try {
             if (amount > balance) {
                 throw new InsufficientFundsException("Попытка снять больше, чем на балансе!");
             }
             balance -= amount;
+            LOGGER.info("Остаток баланса {}",balance);
         } catch (InsufficientFundsException exception) {
             LOGGER.error("Текущий баланс {}. Попытка снять {}", balance, amount);
         }
