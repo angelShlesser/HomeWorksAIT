@@ -8,9 +8,9 @@ public class JavaFiles {
         /*
    Создаем объект File для файла "fileOne.txt" внутри директории "files"
    и выводим информацию о файле
-*/
+        */
         File fileOne = new File("files/fileOne.txt");
-        fileOne.mkdir(); // создаем директорию (если ее нет)
+
         // Создаем объект File для файла "fileOne.txt" внутри директории "files";
 
         try {
