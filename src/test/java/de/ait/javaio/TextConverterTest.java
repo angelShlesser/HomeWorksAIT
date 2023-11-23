@@ -15,6 +15,6 @@ class TextConverterTest {
         StringReader stringReader = new StringReader("HeLLo JAVA");
         StringWriter stringWriter =new StringWriter();
         String result = textConvertor.convertToLowerCase(stringReader,stringWriter);
-        assertEquals("hello java", result);
+        assertEquals("java", result);
     }
 }

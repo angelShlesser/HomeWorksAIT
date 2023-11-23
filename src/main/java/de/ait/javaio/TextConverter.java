@@ -8,7 +8,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.util.Arrays;
 
 public class TextConverter {
     // Инициализация логгера с использованием SLF4J
@@ -24,30 +23,32 @@ public class TextConverter {
      * @throws IOException В случае ошибок ввода/вывода.
      */
     public String convertToLowerCase(Reader input, Writer output) throws IOException {
-        // Инициализация BufferedReader и BufferedWriter для эффективного чтения и записи
+        // Использование try-with-resources для автоматического закрытия ресурсов
         try (BufferedReader bufferedReader = new BufferedReader(input);
              BufferedWriter bufferedWriter = new BufferedWriter(output)) {
             String line;
-            StringBuilder convertedTextBuilder = new StringBuilder();
-
+            String lowerCaseWord = null;
             // Чтение строк из файла
             while ((line = bufferedReader.readLine()) != null) {
-                // Разделение строки на слова
                 String[] words = line.split("\\s+");
                 for (int i = 0; i < words.length; i++) {
-                    // Преобразование каждого слова в нижний регистр и запись в BufferedWriter
-                    String lowerCaseWord = words[i].toLowerCase();
+                    // Преобразование слова в нижний регистр
+                    lowerCaseWord = words[i].toLowerCase();
+                    // Добавление пробела перед словом, если это не первое слово в строке
+                    if (i > 0) {
+                        bufferedWriter.write(" ");
+                    }
+                    // Запись преобразованного слова в файл
                     bufferedWriter.write(lowerCaseWord);
-                    bufferedWriter.write(" ");
-                    convertedTextBuilder.append(lowerCaseWord).append(" ");
                 }
                 // Добавление новой строки после обработки каждой строки текста
                 bufferedWriter.newLine();
-                convertedTextBuilder.append(System.lineSeparator());
             }
-
+            // Принудительное опорожнение буферов записи
+            bufferedWriter.flush();
+            // Логирование успешного завершения записи
             LOGGER.info("Запись успешно завершена");
-            return convertedTextBuilder.toString().trim(); // Убрать лишние пробелы в конце строки
+            return lowerCaseWord;
         }
     }
 }
