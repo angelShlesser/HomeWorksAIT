@@ -33,11 +33,16 @@ public class AirportFileCreator {
 
         // Информация об аэропортах
         String[] airportData = {
-                "Paris-Charles-de-Gaulle CDG France",
-                "Heathrow Airport LHR United Kingdom",
-                "Los Angeles International Airport LAX United States",
-                "Tokyo Haneda Airport HND Japan",
-                "Sydney Airport SYD Australia"
+                "Paris-Charles-de-Gaulle;CDG;France",
+                "Heathrow Airport;LHR;United Kingdom",
+                "Los Angeles International Airport;LAX;United States",
+                "Tokyo Haneda Airport;HND;Japan",
+                "Sydney Airport;SYD;Australia",
+                "Berlin Brandenburg Airport;BER;Germany",
+                "Beijing Capital International Airport;PEK;China",
+                "Dubai International Airport;DXB;United Arab Emirates",
+                "Johannesburg OR Tambo International Airport;JNB;South Africa",
+                "Moscow Sheremetyevo International Airport;SVO;Russia"
         };
 
         // Вызов метода для создания файла с информацией об аэропортах

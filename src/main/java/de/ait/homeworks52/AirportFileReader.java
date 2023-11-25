@@ -24,15 +24,15 @@ public class AirportFileReader {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     // Разделение строки на части
-                    String[] parts = line.split("\\s+");
+                    String[] parts = line.split(";", 3);
 
-                    if (parts.length >= 3) {
+                    if (parts.length == 3) {
                         // Вывод информации об аэропорте в консоль
                         String airportName = parts[0];
                         String iataCode = parts[1];
                         String country = parts[2];
 
-                        printAirportInfo(airportName, iataCode, country);
+                        LOGGER.info("Название: {}, Код: {}, Страна: {}",airportName,iataCode,country);
                     } else {
                         LOGGER.warn("Неверный формат строки в файле: {}", line);
                     }
@@ -43,16 +43,5 @@ public class AirportFileReader {
         } else {
             LOGGER.error("Файл не существует: {}", file.getAbsolutePath());
         }
-    }
-
-    /**
-     * Вывод информации об аэропорте в консоль.
-     *
-     * @param airportName Название аэропорта.
-     * @param iataCode    Код IATA.
-     * @param country     Страна.
-     */
-    private static void printAirportInfo(String airportName, String iataCode, String country) {
-        System.out.println("Название: " + airportName + ", Код IATA: " + iataCode + ", Страна: " + country);
     }
 }
