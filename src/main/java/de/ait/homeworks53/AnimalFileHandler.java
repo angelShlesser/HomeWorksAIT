@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,7 +42,11 @@ public class AnimalFileHandler {
                 System.out.println(line);
             }
             LOGGER.info("Чтение данных о животных из файла: {}", filePath);
-        } catch (IOException exception) {
+        }
+        catch (FileNotFoundException exception){
+            LOGGER.error("Файл не найден {}", exception.getMessage());
+        }
+        catch (IOException exception) {
             // Обработка ошибок ввода-вывода
             LOGGER.error("Ошибка при чтении из файла: {}", exception.getMessage());
         }
