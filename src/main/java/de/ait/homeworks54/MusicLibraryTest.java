@@ -26,5 +26,24 @@ public class MusicLibraryTest {
         for (Album album : popAlbums) {
             System.out.println("Название: " + album.getTitle() + ", Артист: " + album.getArtist());
         }
+
+        // Использование конструкции switch с перечислением MusicGenre
+        switch (searchGenre) {
+            case POP:
+                System.out.println("Выбран жанр POP");
+                // Дополнительные действия для жанра POP
+                break;
+            case ROCK:
+                System.out.println("Выбран жанр ROCK");
+                // Дополнительные действия для жанра ROCK
+                break;
+            case JAZZ:
+                System.out.println("Выбран жанр JAZZ");
+                // Дополнительные действия для жанра JAZZ
+                break;
+            // Добавьте другие кейсы по мере необходимости
+            default:
+                System.out.println("Выбран неизвестный жанр");
+        }
     }
 }
