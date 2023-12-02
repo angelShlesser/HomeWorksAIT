@@ -3,7 +3,7 @@ package de.ait.timeapi;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class TimeUtil {
+public class LocalDateUtil {
 
     public static void main(String[] args) {
         // Получение текущей даты
