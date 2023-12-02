@@ -1,12 +1,16 @@
 package de.ait.homeworks55;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class FashionShop {
     // Каталог для хранения товаров в соответствии с категориями
-    private EnumMap<FashionCategory, Set<FashionItem>> catalog;
+    private final EnumMap<FashionCategory, Set<FashionItem>> catalog;
+    private static final Logger LOGGER = LoggerFactory.getLogger(FashionShop.class);
 
     // Конструктор класса
     public FashionShop() {
@@ -27,7 +31,7 @@ public class FashionShop {
 
     // Метод для вывода информации о товарах для определенного сезона
     public void showInfoAboutSeason(Season season) {
-        System.out.println("Поиск по сезону --> " + season);
+        LOGGER.info("Поиск по сезону --> {}", season);
         // Перебор категорий
         for (FashionCategory fashionCategory : FashionCategory.values()) {
 
@@ -35,7 +39,7 @@ public class FashionShop {
             for (FashionItem item : catalog.get(fashionCategory)) {
                 // Вывод информации о товаре, если он относится к указанному сезону
                 if (item.getSeason().equals(season)) {
-                    System.out.println(item.toString());
+                    LOGGER.info("Информация --> {}",item);
                 }
             }
         }
