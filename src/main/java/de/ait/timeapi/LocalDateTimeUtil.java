@@ -1,10 +1,8 @@
 package de.ait.timeapi;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class LocalDateTimeUtil {
     public static void main(String[] args) {
@@ -62,16 +60,5 @@ public class LocalDateTimeUtil {
         // Переключаем временную зону
         ZonedDateTime newYorkTime = zonedDateTime1.withZoneSameInstant(zoneId2);
         System.out.println("То же время в Нью-Йорке, но в Токио: " + newYorkTime);
-
-        // Создаем объект LocalDateTime для "1 января 2023 года, 12:00"
-        LocalDateTime dateTime = LocalDateTime.of(2023, Month.JANUARY, 1, 12, 0);
-
-        // Создаем объект DateTimeFormatter с необходимым шаблоном
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy 'года, 'HH:mm");
-
-        // Форматируем LocalDateTime и выводим в консоль
-        String formattedDateTime = dateTime.format(formatter);
-        System.out.println(formattedDateTime);
-
     }
 }

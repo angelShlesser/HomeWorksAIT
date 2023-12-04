@@ -6,6 +6,7 @@ import java.time.Month;
 import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class AufgabenTimeAPI {
@@ -26,6 +27,16 @@ public class AufgabenTimeAPI {
         // Создаем LocalDateTime для 1 января 2023 года, 12:00
         LocalDateTime localDateTime = LocalDateTime.of(2023, 1, 1, 12, 0);
         System.out.println(localDateTime);
+
+        // Создаем объект LocalDateTime для "1 января 2023 года, 12:00"
+        LocalDateTime dateTime = LocalDateTime.of(2023, Month.JANUARY, 1, 12, 0);
+
+        // Создаем объект DateTimeFormatter с необходимым шаблоном
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy 'года, 'HH:mm");
+
+        // Форматируем LocalDateTime и выводим в консоль
+        String formattedDateTime = dateTime.format(formatter);
+        System.out.println(formattedDateTime);
 
         // Создаем две LocalDate и вычисляем разницу в днях и годах между ними
         LocalDate localDateOne = LocalDate.of(2030, 1, 1);
