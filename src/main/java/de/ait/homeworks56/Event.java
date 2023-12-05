@@ -1,25 +1,26 @@
 package de.ait.homeworks56;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event {
-    /*
-    Создайте класс Event, который содержит следующие поля:
-        String name - название события.
-        LocalDateTime startDateTime - дата и время начала события.
-        LocalDateTime endDateTime - дата и время окончания события.
-    Реализуйте конструкторы, геттеры и сеттеры для этих полей.
-     */
+    // Название события
     private String name;
+
+    // Дата и время начала события
     private LocalDateTime startDateTime;
+
+    // Дата и время окончания события
     private LocalDateTime endDateTime;
 
+    // Конструктор класса
     public Event(String name, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.name = name;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
 
+    // Геттер и сеттер для названия события
     public String getName() {
         return name;
     }
@@ -28,6 +29,7 @@ public class Event {
         this.name = name;
     }
 
+    // Геттер и сеттер для даты и времени начала события
     public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
@@ -36,6 +38,7 @@ public class Event {
         this.startDateTime = startDateTime;
     }
 
+    // Геттер и сеттер для даты и времени окончания события
     public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
@@ -44,12 +47,14 @@ public class Event {
         this.endDateTime = endDateTime;
     }
 
+    // Переопределение метода toString для более читаемого вывода
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         return "Event{" +
                 "name='" + name + '\'' +
-                ", startDateTime=" + startDateTime +
-                ", endDateTime=" + endDateTime +
+                ", startDateTime=" + startDateTime.format(formatter) +
+                ", endDateTime=" + endDateTime.format(formatter) +
                 '}';
     }
 }

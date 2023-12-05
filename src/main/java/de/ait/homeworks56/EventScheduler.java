@@ -1,41 +1,38 @@
 package de.ait.homeworks56;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class EventScheduler {
-    private List<Event> events;
+public class EventScheduler {
+    private List<Event> eventsList;
 
     // Конструктор для создания объекта EventScheduler
     public EventScheduler() {
-        this.events = new ArrayList<>();
+        this.eventsList = new ArrayList<>();
     }
 
     // Метод для добавления события в список
-    public void addEvent(Event event) {
-        events.add(event);
+    public void addEvent(Event eventToAdd) {
+        eventsList.add(eventToAdd);
     }
 
     // Метод для удаления события из списка
-    public void removeEvent(Event event) {
-        events.remove(event);
+    public void removeEvent(Event eventToDelete) {
+        eventsList.remove(eventToDelete);
     }
 
     // Метод для получения списка всех запланированных событий
     public List<Event> getAllEvents() {
-        return new ArrayList<>(events);
+        return new ArrayList<>(eventsList);
     }
 
     // Метод для получения списка событий, запланированных на конкретную дату
-    public List<Event> getEventsOnDate(LocalDateTime date) {
+    public List<Event> getEventsOnDate(LocalDate localDate) {
         List<Event> eventsOnDate = new ArrayList<>();
-        for (Event event : events) {
-            LocalDateTime startDateTime = event.getStartDateTime();
-            LocalDateTime endDateTime = event.getEndDateTime();
-
-            if ((startDateTime.isEqual(date) || startDateTime.isBefore(date)) &&
-                    (endDateTime.isEqual(date) || endDateTime.isAfter(date))) {
+        for (Event event : eventsList) {
+            if (event.getStartDateTime().toLocalDate().isEqual(localDate)) {
                 eventsOnDate.add(event);
             }
         }
@@ -51,5 +48,11 @@ class EventScheduler {
 
         return (startDateTime1.isBefore(endDateTime2) && endDateTime1.isAfter(startDateTime2)) ||
                 (startDateTime2.isBefore(endDateTime1) && endDateTime2.isAfter(startDateTime1));
+    }
+
+    // Метод для проверки, пересекаются ли времена двух событий
+    public boolean checkEventsToOverlap(Event eventOne, Event eventTwo){
+        return eventOne.getStartDateTime().isBefore(eventTwo.getEndDateTime())
+                && eventTwo.getStartDateTime().isBefore(eventOne.getEndDateTime());
     }
 }
