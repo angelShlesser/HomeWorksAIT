@@ -32,8 +32,8 @@ public class TwoDArrayOperationsOnline {
      * @return созданный массив
      */
     public static int[][] createArray(int lineSize, int colSize) {
-        if (lineSize<=0 || colSize <=0){
-            LOGGER.error("Wrong value method: {} {}",lineSize,colSize);
+        if (lineSize <= 0 || colSize <= 0) {
+            LOGGER.error("Wrong value method: {} {}", lineSize, colSize);
             throw new NumberFormatException("Wrong value in method!");
         }
         int[][] arrayToReturn = new int[lineSize][colSize];
