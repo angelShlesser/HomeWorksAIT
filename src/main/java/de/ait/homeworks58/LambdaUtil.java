@@ -51,5 +51,16 @@ public class LambdaUtil {
 
         // Выводим результат на экран
         LOGGER.info("Строки в верхнем регистре: {}", upperCaseStrings);
+
+        List<String> cities = Arrays.asList("Paris", "London", "Berlin", "Madrid", "Lisbon");
+        //Запускаем поток --> фильтруем те что начинаются на L --> перевод в верхний регистр --> отсортировать
+        cities.stream()
+                // Фильтруем города, оставляя только те, что начинаются на L
+                .filter(capital -> capital.startsWith("L"))
+                // Преобразуем города в верхний регистр
+                .map(String::toUpperCase)
+                .sorted()
+                // Выводим результат на экран
+                .forEach(city -> LOGGER.info("Результат: {}", city));
     }
 }
