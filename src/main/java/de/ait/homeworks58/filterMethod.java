@@ -12,7 +12,7 @@ public class filterMethod {
         // Используем Stream API и метод filter для отфильтровки строк, начинающихся с буквы "А"
         List<String> filteredStrings = strings.stream()
                 .filter(s -> s.startsWith("А"))
-                .collect(Collectors.toList());
+                .toList();
 
         // Выводим отфильтрованные строки на экран
         filteredStrings.forEach(System.out::println);
@@ -23,7 +23,7 @@ public class filterMethod {
         // Используем Stream API и метод map для преобразования каждого числа в его квадрат
         List<Integer> squaredNumbers = numbers.stream()
                 .map(number -> number * number)
-                .collect(Collectors.toList());
+                .toList();
 
         // Выводим результат на экран
         squaredNumbers.forEach(System.out::println);
@@ -33,7 +33,7 @@ public class filterMethod {
                 .filter(number -> number % 2 == 0)
                 .forEach(System.out::println);
         // Используем метод forEach с лямбда-выражением для печати каждого элемента списка
-        numbers.forEach(number -> System.out.println(number));
+        numbers.forEach(System.out::println);
 
         // Создаем список строк
         List<String> stringsTwo = Arrays.asList("apple", "banana", "orange", "grape");
@@ -41,7 +41,7 @@ public class filterMethod {
         // Используем Stream API и метод map для преобразования строк в верхний регистр
         List<String> upperCaseStrings = stringsTwo.stream()
                 .map(String::toUpperCase) // Используем метод toUpperCase для каждой строки
-                .collect(Collectors.toList());
+                .toList();
 
         // Выводим результат на экран
         upperCaseStrings.forEach(System.out::println);
