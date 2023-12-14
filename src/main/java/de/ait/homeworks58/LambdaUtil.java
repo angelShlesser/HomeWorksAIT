@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class LambdaUtil {
     // Логгер для этого класса
@@ -62,5 +63,9 @@ public class LambdaUtil {
                 .sorted()
                 // Выводим результат на экран
                 .forEach(city -> LOGGER.info("Результат: {}", city));
+
+        LOGGER.info("-----");
+        Optional<String> resultSelect = cities.stream().filter(capital -> capital.startsWith("L")).findFirst().map(String::toUpperCase);
+        resultSelect.ifPresent(city -> LOGGER.info("Результат: {}", city));
     }
 }
