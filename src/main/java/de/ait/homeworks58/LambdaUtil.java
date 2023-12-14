@@ -1,10 +1,15 @@
 package de.ait.homeworks58;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class filterMethod {
+public class LambdaUtil {
+    // Логгер для этого класса
+    private static final Logger LOGGER = LoggerFactory.getLogger(LambdaUtil.class);
+
     public static void main(String[] args) {
         // Создаем список строк
         List<String> strings = Arrays.asList("Арбуз", "Банан", "Апельсин", "Груша", "Авокадо");
@@ -15,7 +20,7 @@ public class filterMethod {
                 .toList();
 
         // Выводим отфильтрованные строки на экран
-        filteredStrings.forEach(System.out::println);
+        LOGGER.info("Отфильтрованные строки: {}", filteredStrings);
 
         // Создаем список целых чисел
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
@@ -26,17 +31,18 @@ public class filterMethod {
                 .toList();
 
         // Выводим результат на экран
-        squaredNumbers.forEach(System.out::println);
+        LOGGER.info("Квадраты чисел: {}", squaredNumbers);
 
         // Используем Stream API и лямбда-выражение для фильтрации четных чисел и их вывода на экран
         numbers.stream()
                 .filter(number -> number % 2 == 0)
-                .forEach(System.out::println);
+                .forEach(evenNumber -> LOGGER.info("Четное число: {}", evenNumber));
+
         // Используем метод forEach с лямбда-выражением для печати каждого элемента списка
-        numbers.forEach(System.out::println);
+        numbers.forEach(number -> LOGGER.info("Элемент списка: {}", number));
 
         // Создаем список строк
-        List<String> stringsTwo = Arrays.asList("apple", "banana", "orange", "grape");
+        List<String> stringsTwo = Arrays.asList("яблоко", "банан", "апельсин", "виноград");
 
         // Используем Stream API и метод map для преобразования строк в верхний регистр
         List<String> upperCaseStrings = stringsTwo.stream()
@@ -44,6 +50,6 @@ public class filterMethod {
                 .toList();
 
         // Выводим результат на экран
-        upperCaseStrings.forEach(System.out::println);
+        LOGGER.info("Строки в верхнем регистре: {}", upperCaseStrings);
     }
 }
