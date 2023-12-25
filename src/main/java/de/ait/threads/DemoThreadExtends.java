@@ -1,38 +1,21 @@
 package de.ait.threads;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DemoThreadRunnable implements Runnable {
+public class DemoThreadExtends extends  Thread{
     // Логгер для этого класса
-    private static final Logger LOGGER = LoggerFactory.getLogger(DemoThreadRunnable.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoThreadExtends.class);
 
     private Thread thread;
     private String threadName;
 
-    // Конструктор класса, принимает имя потока
-    public DemoThreadRunnable(String threadName) {
-        this.threadName = threadName;
+    public DemoThreadExtends(String name) {
+        this.threadName = name;
         LOGGER.info("Creating thread: {}", threadName);
     }
-
-    // Метод, который будет выполняться при запуске потока
-    @Override
     public void run() {
-        LOGGER.info("Running thread: {}", Thread.currentThread().getName()); // Используем метод Thread.currentThread() для получения текущего потока
-        if (threadName.equals("Thread 1")) {
-            thread.setPriority(10);
-            thread.setName("Thread One!");
-        }
-        if (threadName.equals("Thread 2")) {
-            thread.setPriority(1);
-            thread.setName("Thread Two!");
-            try {
-                thread.join(1000);
-            } catch (InterruptedException e) {
-                LOGGER.error("Interrupted!", e);
-            }
-        }
         try {
             for (int i = 4; i > 0; i--) {
                 LOGGER.info("Thread name: {}, i: {}", thread.getName(), i);
@@ -58,13 +41,20 @@ public class DemoThreadRunnable implements Runnable {
         LOGGER.info("Thread {} is finished {}.", threadName, thread.isAlive());
     }
 
-    // Метод для запуска потока
-    public void start() {
-        LOGGER.info("Start thread: {}", threadName);
-        if (thread == null) {
-            // Создаем новый поток и передаем ему текущий объект DemoThreadRunnable
-            thread = new Thread(this, threadName);
-            thread.start();
+    public void start (){
+        LOGGER.info("Running thread: {}", Thread.currentThread().getName()); // Используем метод Thread.currentThread() для получения текущего потока
+        if (threadName.equals("Thread 1")) {
+            thread.setPriority(10);
+            thread.setName("Thread One!");
+        }
+        if (threadName.equals("Thread 2")) {
+            thread.setPriority(1);
+            thread.setName("Thread Two!");
+            try {
+                thread.join(1000);
+            } catch (InterruptedException e) {
+                LOGGER.error("Interrupted!", e);
+            }
         }
     }
 }
