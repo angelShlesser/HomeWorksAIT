@@ -1,0 +1,274 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: Inter;
+  src: url("/font/Inter-Bold.ttf");
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: InterThin;
+  src: url("/font/Inter-Thin.ttf");
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  background: url("./weather.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(18, 45, 77, 0.5);
+  gap: 10px;
+  border-bottom: 1px solid #D2D2D2;
+}
+
+header p {
+font-family: "Inter";
+color: white;
+font-weight: 700;
+font-size: 24px;
+letter-spacing: -0.04em;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 120px;
+  align-items: center;
+  gap: 20px;
+}
+
+.weather-form {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+#city-input {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255);
+  color: rgb(255, 255, 255);
+  min-width: 100%;
+  outline: none;
+}
+
+.search-button{
+  padding: 12px 40px;
+  background-color: rgb(54, 120, 180);
+  border-radius: 50px;
+  border: none;
+  color: rgb(255, 255, 255);
+}
+.weather-block, .weather-error {
+  display: flex;
+  color: white;
+  font-size: 24px;
+  font-family: InterThin;
+  letter-spacing: -0.04em;
+  background-color: rgba(47, 72, 111, 0.62);
+  border-radius: 10px;
+  padding: 10px 20px;
+  gap: 10px;
+  text-align: center;
+}
+
+.weather-card{
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+.weather-error{
+  display: none;
+  flex-direction: column;
+}
+
+.api-error {
+  color: #F35E5E;
+  font-family: "Inter";
+  letter-spacing: normal;
+}
+
+.weather-icon {
+  height: 20px;
+  width: auto;
+}
+
+.info {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.info p {
+  padding-left: 5px;
+  font-size: 14px;
+}
+
+.feels-temp {
+  font-size: 40px;
+}
+
+.temp {
+  font-size: 40px;
+}
+
+.weather-block.weather-feels {
+  flex-direction: column;
+}
+
+.weather-img {
+  width: 75px;
+  height: auto;
+}
+
+#circleG{
+  display: none;
+	width:49px;
+	margin:auto;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+.circleG{
+	background-color:rgb(255,255,255);
+	float:left;
+	height:3px;
+	margin-left:3px;
+	width:10px;
+	animation-name:bounce_circleG;
+		-o-animation-name:bounce_circleG;
+		-ms-animation-name:bounce_circleG;
+		-webkit-animation-name:bounce_circleG;
+		-moz-animation-name:bounce_circleG;
+	animation-duration:1.4575s;
+		-o-animation-duration:1.4575s;
+		-ms-animation-duration:1.4575s;
+		-webkit-animation-duration:1.4575s;
+		-moz-animation-duration:1.4575s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+	border-radius:7px;
+		-o-border-radius:7px;
+		-ms-border-radius:7px;
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+}
+
+#circleG_1{
+	animation-delay:0.2895s;
+		-o-animation-delay:0.2895s;
+		-ms-animation-delay:0.2895s;
+		-webkit-animation-delay:0.2895s;
+		-moz-animation-delay:0.2895s;
+}
+
+#circleG_2{
+	animation-delay:0.6855s;
+		-o-animation-delay:0.6855s;
+		-ms-animation-delay:0.6855s;
+		-webkit-animation-delay:0.6855s;
+		-moz-animation-delay:0.6855s;
+}
+
+#circleG_3{
+	animation-delay:0.8785s;
+		-o-animation-delay:0.8785s;
+		-ms-animation-delay:0.8785s;
+		-webkit-animation-delay:0.8785s;
+		-moz-animation-delay:0.8785s;
+}
+
+
+
+@keyframes bounce_circleG{
+	0%{}
+
+	50%{
+		background-color:rgb(58,76,194);
+	}
+
+	100%{}
+}
+
+@-o-keyframes bounce_circleG{
+	0%{}
+
+	50%{
+		background-color:rgb(58,76,194);
+	}
+
+	100%{}
+}
+
+@-ms-keyframes bounce_circleG{
+	0%{}
+
+	50%{
+		background-color:rgb(58,76,194);
+	}
+
+	100%{}
+}
+
+@-webkit-keyframes bounce_circleG{
+	0%{}
+
+	50%{
+		background-color:rgb(58,76,194);
+	}
+
+	100%{}
+}
+
+@-moz-keyframes bounce_circleG{
+	0%{}
+
+	50%{
+		background-color:rgb(58,76,194);
+	}
+
+	100%{}
+}

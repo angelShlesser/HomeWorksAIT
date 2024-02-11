@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather app</title>
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="root">
+      <header>
+        <p>Weather App</p>
+      </header>
+      <main>
+        <form class="weather-form">
+          <input id="city-input" placeholder="Colorado" name="city" />
+          <div id="circleG">
+            <div id="circleG_1" class="circleG"></div>
+            <div id="circleG_2" class="circleG"></div>
+            <div id="circleG_3" class="circleG"></div>
+          </div>
+          <button type="submit" class="search-button">Search</button>
+        </form>
+        <div class="weather-card">
+          <div class="weather-block">
+          <div class="weather-info">
+            <p class="temp"></p>
+            <p class="city-name"></p>
+          </div>
+          <img class="weather-img" alt="Current weather conditions in the city" />
+          </div>
+          <div class="weather-block weather-feels">
+            <div class="info">
+              <img  class="weather-icon" src="/icon.png" alt="Icons FEELS LIKE">
+              <p>FEELS LIKE</p>
+            </div>
+            <div class="feels-temp"></div>
+          </div>
+        </div>
+        <div class="weather-error">
+            <p class="api-error">API Error</p>
+            <p class="error-message"></p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
